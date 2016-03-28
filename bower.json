@@ -1,0 +1,9 @@
+{
+  "name": "Famnizer",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "1.4.9",
+    "angular-ui-router": "0.2.13",
+    "bootstrap": "3.3.6"
+  }
+}
