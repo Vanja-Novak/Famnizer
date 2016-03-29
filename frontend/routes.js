@@ -24,16 +24,25 @@ app.config([
                 url: '/',
                 templateUrl: 'views/pages/index.html',
                 data: {
-                    title: 'Index'
+                    title: 'Famnizer'
                 }
             })
             .state('register', {
                 parent: 'base',
                 url: '/register',
-                templateUrl: 'views/pages/register.html',
+                templateUrl: 'views/pages/user/register.html',
                 controller: 'UserController',
                 data: {
-                    title: 'Projects'
+                    title: 'Registration'
+                }
+            })
+            .state('login', {
+                parent: 'base',
+                url: '/login',
+                templateUrl: 'views/pages/user/login.html',
+                controller: 'UserController',
+                data: {
+                    title: 'Login'
                 }
             })
     }]

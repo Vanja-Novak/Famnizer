@@ -1,0 +1,24 @@
+<div>
+    <form class="form-horizontal" role="form">
+        <fieldset>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="login"> Логин </label>
+                <div class="col-md-6">
+                    <input id="login" name="login" class="form-control" ng-model="user.login">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="pass"> пароль </label>
+                <div class="col-md-6">
+                    <input id="pass" type="password" name="pass" class="form-control" ng-model="user.password">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="submit" class="btn btn-default" ng-click="login();"> Войти </button>
+</div>

@@ -15,4 +15,12 @@ router.post('/register', function(req, res, next) {
     storage.addUser(user);
 });
 
+router.post('/login', function(req, res, next) {
+    var user  = new User(req.body);
+    user = storage.findUser(user, ['id']);
+    console.log(user);
+
+    res.send(user);
+});
+
 module.exports = router;

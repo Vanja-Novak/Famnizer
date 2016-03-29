@@ -28,5 +28,13 @@ angular.module('famnizer')
                     data: $scope.user
                 });
             };
+
+            $scope.login = function() {
+                $http({
+                    url: 'users/login',
+                    method: 'POST',
+                    data: $scope.user
+                });
+            };
         }
     ]);
