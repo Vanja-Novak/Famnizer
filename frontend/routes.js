@@ -26,6 +26,15 @@ app.config([
                 data: {
                     title: 'Index'
                 }
-            });
+            })
+            .state('register', {
+                parent: 'base',
+                url: '/register',
+                templateUrl: 'views/pages/register.html',
+                controller: 'UserController',
+                data: {
+                    title: 'Projects'
+                }
+            })
     }]
 );

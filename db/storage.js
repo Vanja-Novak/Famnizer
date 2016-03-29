@@ -4,21 +4,28 @@ var Product = require('../model/Product');
 
 
 function Storage() {
-    var UserStorage = [];
-    var RoomStorage = [];
-    var ProductStorage = [];
+
+    var userStorage = [];
+    var roomStorage = [];
+    var productStorage = [];
     var i;
 
     var API = {};
 
     API.getUsers = function() {
-        return UserStorage;
+        return userStorage;
     };
     API.getRooms = function() {
-        return UserStorage;
+        return userStorage;
     };
     API.getProducts = function() {
-        return UserStorage;
+        return userStorage;
+    };
+
+    API.addUser = function(user) {
+        user.id = userStorage[userStorage.length - 1].id + 1;
+        userStorage.push(user);
+        console.log(userStorage);
     };
 
     function init() {
@@ -31,17 +38,17 @@ function Storage() {
 
     function createUsers() {
         for(i = 1; i<6; i++) {
-            UserStorage.push(new User(i, 'user_' + i));
+            userStorage.push(new User(i, 'user_' + i, 'user' + i));
         }
     }
     function createProducts() {
         for(i = 1; i<6; i++) {
-            ProductStorage.push(new Product(i, 'product_' + i));
+            productStorage.push(new Product(i, 'product_' + i));
         }
     }
     function createRooms() {
         for(i = 1; i<6; i++) {
-            RoomStorage.push(new Room(i, 'room_' + i));
+            roomStorage.push(new Room(i, 'room_' + i));
         }
     }
 
