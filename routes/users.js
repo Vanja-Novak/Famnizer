@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var auth = require('../auth');
-var winston = require('winston');
 var db = require('../db');
 var User = require('../model/User');
 
