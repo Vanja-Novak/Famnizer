@@ -2,94 +2,42 @@ var User = require('../model/User');
 var Room = require('../model/Room');
 var Product = require('../model/Product');
 var diff = require('deep-diff');
+var RecordExistsError = require('../errors/RecordExistsError');
+
+var connection = require('./connection');
 
 function Storage() {
 
-    var userStorage = [];
-    var roomStorage = [];
-    var productStorage = [];
-    var i;
-
     var API = {};
 
-    API.getUsers = function() {
-        return userStorage;
-    };
-    API.getRooms = function() {
-        return userStorage;
-    };
-    API.getProducts = function() {
-        return userStorage;
+    API.getUsers = function(callback) {
+        connection.connect();
+        connection.query('select * from user', callback);
+        connection.end();
     };
 
-    API.addUser = function(user) {
-        user.id = userStorage[userStorage.length - 1].id + 1;
-        userStorage.push(user);
-        console.log(userStorage);
+    API.addUser = function(user, callback) {
+        connection.query("insert into user (login, password) values ('" + [user.login, user.password].join("','") + "')", callback);
     };
     
-    API.findUser = function(user, exclusions) {
-        if( ! exclusions) {
-            return find(userStorage, user);
-        } else {
-            return findExcludeFields(userStorage, user, exclusions);
-        }
+    API.findUser = function(user, callback) {
+        var cons = prepareConditions(user);
+        connection.query('select * from user where ' + cons, callback);
     };
-    
-    /**
-     * 
-     * @param arr - storage to search
-     * @param obj - object to search
-     * @returns object from storage, or undefined 
-     */
-    function find(arr, obj) {
-        return arr.filter(function (el) {
-            return diff(obj, el) === undefined;
-        });
-    }
 
-    /**
-     * 
-     * @param arr
-     * @param obj
-     * @param exclusions - array of fields (as string) that should be ignored
-     * @returns object from storage, or undefined
-     */
-    function findExcludeFields(arr, obj, exclusions) {
-        obj = arr.filter(function (el) {
-            var diffs = diff(obj, el);
-            diffs = diffs.filter(function(diff) {
-               return exclusions.indexOf(diff.path[0]) === -1;
-            });
-            return diffs.length === 0;
-        });
-
-        return obj[0];
-    }
-
-    function init() {
-        createUsers();
-        createProducts();
-        createRooms();
-    }
-    init();
-
-
-    function createUsers() {
-        for(i = 1; i<6; i++) {
-            userStorage.push(new User(i, 'user_' + i, 'user' + i));
+    function prepareConditions(obj) {
+        var res = [];
+        for(prop in obj) {
+            if(prop !== 'id')
+                res.push(prop + " = \'" + obj[prop] + '\'');
         }
-    }
-    function createProducts() {
-        for(i = 1; i<6; i++) {
-            productStorage.push(new Product(i, 'product_' + i));
-        }
-    }
-    function createRooms() {
-        for(i = 1; i<6; i++) {
-            roomStorage.push(new Room(i, 'room_' + i));
-        }
-    }
+
+        return res.join(' and ');
+    };
+
+    API.findUserById = function(id) {
+        connection.query("select * from user where id = " + id, callback);
+    };
 
     return API;
 }

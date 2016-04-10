@@ -1,25 +1,46 @@
 var express = require('express');
 var router = express.Router();
-var auth = require('../auth');
-var winston = require('winston');
 var db = require('../db');
 var User = require('../model/User');
+var RecordExistsError = require('../errors/RecordExistsError');
+var ObjectNotFoundError = require('../errors/ObjectNotFoundError');
 
 router.get('/', function(req, res, next) {
-    res.send(db.getUsers());
+    db.getUsers(function (err, rows, fields) {
+        res.send(rows);
+    });
 });
 
 router.post('/register', function(req, res, next) {
     var user  = new User(req.body);
-    db.addUser(user);
+
+    db.addUser(user, function (err) {
+
+        if(err) {
+            next(new RecordExistsError(500));
+        }
+
+        res.end();
+    });
 });
 
 router.post('/login', function(req, res, next) {
-    var user  = new User(req.body);
-    user = db.findUser(user, ['id']);
-    console.log(user);
 
-    res.send(user);
+    var user  = new User(req.body);
+
+    db.findUser(user, function(err, rows) {
+
+        if(err || rows.length === 0) {
+            next(new ObjectNotFoundError(500));
+            return;
+        }
+        
+        user = rows[0];
+        var token = new Buffer(user.login + ':' + user.password).toString('base64');
+
+        res.send(token);
+    });
+
 });
 
 module.exports = router;

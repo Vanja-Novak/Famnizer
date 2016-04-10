@@ -1,0 +1,4 @@
+{
+  "OBJECT_NOT_FOUND_IN_DB": "Объект не существует",
+  "OBJECT_ALREADY_EXISTS_IN_DB": "Такая запись уже существует"
+}
