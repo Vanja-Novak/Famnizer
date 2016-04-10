@@ -1,4 +1,4 @@
-var app = angular.module('famnizer', ['ui.router']);
+var app = angular.module('famnizer', ['ui.router', 'growl', 'ngCookies']);
 
 app.run(function($rootScope, $state) {
     $rootScope.$state = $state;

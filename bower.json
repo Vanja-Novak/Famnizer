@@ -4,6 +4,7 @@
   "dependencies": {
     "angular": "1.4.9",
     "angular-ui-router": "0.2.13",
-    "bootstrap": "3.3.6"
+    "bootstrap": "3.3.6",
+    "angular-cookies": "^1.5.3"
   }
 }

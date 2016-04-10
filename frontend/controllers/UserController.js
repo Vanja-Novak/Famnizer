@@ -5,20 +5,23 @@ angular.module('famnizer')
 
         '$scope',
         '$http',
+        '$state',
+        '$growl',
+        'StorageService',
 
-        function($scope, $http) {
+        function($scope, $http, $state, $growl, StorageService) {
 
             $scope.user = {};
 
             $scope.save = function() {
 
                 if( !$scope.user.password || !$scope.user.passRepeat) {
-                    alert('Проверьте пароль');
+                    $growl.addMessage('Attention!', 'Проверьте пароль', 'warning');
                     return;
                 }
 
                 if($scope.user.password !== $scope.user.passRepeat) {
-                    alert('Пароли не совпадают');
+                    $growl.addMessage('Attention!', 'Пароли не совпадают', 'warning');
                     return;
                 }
 
@@ -26,7 +29,12 @@ angular.module('famnizer')
                     url: 'users/register',
                     method: 'POST',
                     data: $scope.user
-                });
+                }).success(function() {
+
+               })
+                   .error(function (res) {
+                       $growl.addMessage('Ошибка!', res.message, 'danger');
+                   });
             };
 
             $scope.login = function() {
@@ -34,6 +42,13 @@ angular.module('famnizer')
                     url: 'users/login',
                     method: 'POST',
                     data: $scope.user
+                }).success(function (responce, status) {
+                    $growl.addMessage('Success', responce.message, 'success');
+                    StorageService.set(StorageService.configs.Authorization, responce);
+                    $state.go('index');
+                }).error(function (responce, status) {
+                    console.log(status);
+                    $growl.addMessage('Attention!', responce.message, 'error');
                 });
             };
         }
