@@ -29,8 +29,9 @@ angular.module('famnizer')
                     url: 'users/register',
                     method: 'POST',
                     data: $scope.user
-                }).success(function() {
-
+                }).success(function(res) {
+                       $growl.addMessage('Success', res.message, 'success');
+                   $state.go('login');
                })
                    .error(function (res) {
                        $growl.addMessage('Ошибка!', res.message, 'danger');

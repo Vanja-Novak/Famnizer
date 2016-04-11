@@ -18,9 +18,11 @@ router.post('/register', function(req, res, next) {
 
         if(err) {
             next(new RecordExistsError(500));
+        } else {
+            res.json({
+                message: "регистрация успешна"
+            });
         }
-
-        res.end();
     });
 });
 

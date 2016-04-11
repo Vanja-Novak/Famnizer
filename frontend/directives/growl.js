@@ -12,8 +12,8 @@ var growl = angular.module('growl', [ ])
             info: 'glyphicon-info-sign',
             success: 'glyphicon-ok-sign',
             warning: 'glyphicon-exclamation-sign',
-            danger: 'glyphicon-remove-sign',
-        }
+            danger: 'glyphicon-remove-sign'
+        };
 
         var configuredDelayTime;
 
@@ -48,11 +48,6 @@ var growl = angular.module('growl', [ ])
         this.setConfiguredDelayTime = function(delayTime) {
             configuredDelayTime = delayTime;
         };
-
-        this.resetDelayTime = function() {
-            delayTime = configuredDelayTime;
-        };
-
     }])
 
     .controller('growlCtrl', ['$growl', function($growl) {
