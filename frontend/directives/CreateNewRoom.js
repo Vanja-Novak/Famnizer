@@ -39,7 +39,7 @@ angular.module('famnizer')
                 method: 'PUT',
                 data: {
                     room: $scope.room,
-                    userId: currentUserId
+                    userId: +currentUserId
                 }
             });
         }

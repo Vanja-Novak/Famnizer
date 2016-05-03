@@ -28,7 +28,7 @@ router.get('/:room_id', function (req,res,err) {
 });
 
 router.put('/add', function(req,res,err) {
-    var room = new Room(req.body.room);
+    var room = new Room(req.body.room.name);
     var userId = req.body.userId;
 
     db.addRoom(room, userId, function(err) {
