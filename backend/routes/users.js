@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.post('/register', function(req, res, next) {
+router.put('/register', function(req, res, next) {
     var user  = new User(req.body);
 
     db.addUser(user, function (err) {

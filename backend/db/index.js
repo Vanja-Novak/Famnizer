@@ -10,6 +10,10 @@ function Storage() {
 
     var API = {};
 
+    API.getProductsWithRoomId = function(roomId, callback) {
+      connection.query('SELECT * FROM Product WHERE room_fk = ' + roomId + ')',callback);
+    };
+
     API.getRooms = function(userId, callback) {
         connection.query('SELECT Room.id, Room.name FROM Room INNER JOIN Room_has_User ON Room.id = Room_has_User.room_fk WHERE Room_has_User.user_fk =' + userId, callback);
     };
@@ -59,11 +63,13 @@ function Storage() {
         return res.join(' and ');
     };
 
-    API.findUserById = function(id) {
-        connection.connect();
+    API.findUserById = function(id, callback) {
         connection.query("select * from user where id = " + id, callback);
-        connection.end();
     };
+
+    API.userByAuth = function(auth, callback) {
+        connection.query('SELECT * FROM USER WHERE login = '+ auth.name +'AND password = '+ auth.password + ')',callback);
+    }
 
     return API;
 }

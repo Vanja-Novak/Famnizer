@@ -5,10 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var auth = require('./auth/index');
 var users = require('./routes/users');
 var rooms = require('./routes/rooms');
+var products = require('./routes/products');
 
 var app = express();
+
 
 // view engine setup
 app.use(express.static(__dirname + '/frontend'));
@@ -26,7 +29,8 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-
+app.use(auth);
+app.use('/products', products);
 app.use('/users', users);
 app.use('/rooms', rooms);
 
