@@ -8,8 +8,9 @@ angular.module('famnizer')
         '$state',
         '$growl',
         'StorageService',
+        'BroadcastService',
 
-        function($scope, $http, $state, $growl, StorageService) {
+        function($scope, $http, $state, $growl, StorageService, BroadcastService) {
 
             $scope.user = {};
 
@@ -27,7 +28,7 @@ angular.module('famnizer')
 
                $http({
                     url: 'users/register',
-                    method: 'POST',
+                    method: 'PUT',
                     data: $scope.user
                 }).success(function(res) {
                        $growl.addMessage('Success', res.message, 'success');
@@ -46,6 +47,7 @@ angular.module('famnizer')
                 }).success(function (responce, status) {
                     $growl.addMessage('Success', responce.message, 'success');
                     StorageService.set(StorageService.configs.Authorization, responce);
+                    BroadcastService.action('USER_LOGINED');
                     $state.go('index');
                 }).error(function (responce, status) {
                     console.log(status);

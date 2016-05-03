@@ -32,6 +32,8 @@ router.post('/login', function(req, res, next) {
 
     db.findUser(user, function(err, rows) {
 
+        console.log(err);
+
         if(err || rows.length === 0) {
             next(new ObjectNotFoundError(500));
             return;
@@ -40,7 +42,7 @@ router.post('/login', function(req, res, next) {
         user = rows[0];
         var token = new Buffer(user.login + ':' + user.password).toString('base64');
 
-        res.send(token);
+        res.json(token);
     });
 
 });

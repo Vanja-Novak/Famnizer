@@ -1,4 +1,4 @@
-var app = angular.module('famnizer', ['ui.router', 'growl', 'ngCookies']);
+var app = angular.module('famnizer', ['ui.router', 'growl', 'ngCookies', 'ui.bootstrap']);
 
 
 app.config([

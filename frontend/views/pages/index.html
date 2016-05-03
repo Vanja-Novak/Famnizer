@@ -1,5 +1,19 @@
 <div class="panel panel-default">
-    <div class="panel-heading">
+
+    <div class="panel-heading" ng-if="!isLogined">
         Добро пожаловать, пользователь! войди чтобы просмотреть свои комнаты.
+    </div>
+
+    <div ng-if="isLogined" ng-controller="RoomsController">
+
+        <button class="btn btn-sm btn-primary" create-new-room>Добавить комнату</button>
+
+        <div ng-if="rooms.length === 0">
+            У вас нет комнат. Нажмите "Добавить комнату"
+        </div>
+
+        <div ng-if="rooms.length !== 0">
+            Тут перечисления комнат
+        </div>
     </div>
 </div>
