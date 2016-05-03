@@ -41,6 +41,8 @@ angular.module('famnizer')
                     room: $scope.room,
                     userId: +currentUserId
                 }
+            }).success(function () {
+                $scope.$close();
             });
         }
     });
