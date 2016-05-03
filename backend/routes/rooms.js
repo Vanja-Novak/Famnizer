@@ -5,7 +5,7 @@ var Room = require('../model/Room');
 var RecordExistsError = require('../errors/RecordExistsError');
 var ObjectNotFoundError = require('../errors/ObjectNotFoundError');
 
-router.get('/', function(req,res,err) {
+router.get('/', function(req,res,next) {
     var user = req.currentUser;
     db.getRooms(user.id,function (err, rows, fileds) {
         if (err) {
@@ -16,7 +16,7 @@ router.get('/', function(req,res,err) {
     });
 });
 
-router.get('/:room_id', function (req,res,err) {
+router.get('/:room_id', function (req,res,next) {
     db.getRoomById(req.params.room_id,function(err,rows, fields) {
         if (err) {
             next(new ObjectNotFoundError(500, "Комната не найдена"));
@@ -26,7 +26,7 @@ router.get('/:room_id', function (req,res,err) {
     });
 });
 
-router.delete('/:room_id', function (req,res,err) {
+router.delete('/:room_id', function (req,res,next) {
     db.deleteRoomById(req.params.room_id,function(err,rows, fields) {
         if (err) {
             next(new ObjectNotFoundError(500, "Комната не найдена"));
@@ -36,7 +36,7 @@ router.delete('/:room_id', function (req,res,err) {
     });
 });
 
-router.put('/add', function(req,res,err) {
+router.put('/add', function(req,res,next) {
     var room = new Room(req.body.room.name);
     var userId = req.body.userId;
 
