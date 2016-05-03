@@ -3,7 +3,7 @@
 
  module.exports = function (req, res, next) {
 
-     if(req.method === 'OPTIONS' || req.url.indexOf("register") !== -1) {
+     if(req.method === 'OPTIONS' || req.url.indexOf("register") !== -1 || req.url.indexOf("login") !== -1) {
          return next();
      }
 
