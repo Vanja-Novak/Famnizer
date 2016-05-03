@@ -17,9 +17,9 @@
                 return unauthorized(res);
             }
 
-            storage.findUserByAuth(user, function (err, rows, fileds) {
+            storage.userByAuth(user, function (err, rows, fileds) {
                 if (!err && rows) {
-                    req.currentUser = rows;
+                    req.currentUser = rows[0];
                     return next();
                 } else {
                     return unauthorized(res);

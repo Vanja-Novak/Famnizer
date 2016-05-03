@@ -11,7 +11,8 @@ function Storage() {
     var API = {};
 
     API.getProductsWithRoomId = function(roomId, callback) {
-      connection.query('SELECT * FROM Product WHERE room_fk = ' + roomId + ')',callback);
+        roomId = +roomId;
+        connection.query('SELECT * FROM `Product` WHERE room_fk = ' + roomId + ')',callback);
     };
 
     API.getRooms = function(userId, callback) {
@@ -19,6 +20,7 @@ function Storage() {
     };
 
     API.getRoomById = function(roomId, callback) {
+        roomId = +roomId;
         connection.query('SELECT * FROM Room WHERE id = ' + roomId, callback);
     };
 
@@ -68,7 +70,7 @@ function Storage() {
     };
 
     API.userByAuth = function(auth, callback) {
-        connection.query('SELECT * FROM USER WHERE login = '+ auth.name +'AND password = '+ auth.password + ')',callback);
+        connection.query("SELECT * FROM `User` WHERE login = '" + auth.name + "' and password = '" + auth.pass + "'",callback);
     }
 
     return API;

@@ -14,19 +14,19 @@ angular.module('famnizer')
             $scope.products = [];
 
             var init = function() {
-                $http({
-                    method: 'GET',
-                    url: 'rooms/' + $scope.roomId
-                }).success(function (res) {
-                    $scope.room = res[0];
-                })
+                // $http({
+                //     method: 'GET',
+                //     url: 'rooms/' + $scope.roomId
+                // }).success(function (res) {
+                //     $scope.room = res[0];
+                // })
 
                 $http({
                     method: 'GET',
                     url: 'products/room/' + $scope.roomId
                 }).success(function (res) {
                     $scope.products = res;
-                })
+                });
             }
 
             init();

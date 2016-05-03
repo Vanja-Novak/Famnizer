@@ -9,14 +9,14 @@ app.config([
 
     function($httpProvider, $animateProvider, $compileProvider) {
 
-        var requestInterceptor = function($q){
+        var requestInterceptor = function($q, StorageService){
             return {
                 'request': function (config) {
                     if(config.url.indexOf(".") === -1) {
                         config.url = 'http://127.0.0.1:4000/' + config.url;
-                        // if(config.url.indexOf("login") === -1 ) {
-                        //     config.headers['Authorization'] = 'Basic ' + DataStorageService.get(DataStorageService.configs.Authorization);
-                        // }
+                        if(config.url.indexOf("login") === -1 ) {
+                            config.headers['Authorization'] = 'Basic ' + StorageService.get(StorageService.configs.Authorization);
+                        }
                     }
 
                     return config || $q.when(config);
