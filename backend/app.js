@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var users = require('./routes/users');
+var rooms = require('./routes/rooms');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/users', users);
+app.use('/rooms', rooms);
 
 app.use(require('./middleware/errorHandler'));
 
