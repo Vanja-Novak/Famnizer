@@ -45,5 +45,14 @@ app.config([
                     title: 'Login'
                 }
             })
+            .state('roomDetail', {
+                parent: 'base',
+                url: 'room/:roomId',
+                templateUrl: 'views/pages/roomDetail.html',
+                controller: 'RoomController',
+                data: {
+                    title: 'Комната'
+                }
+            })
     }]
 );

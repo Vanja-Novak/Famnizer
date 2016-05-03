@@ -4,16 +4,21 @@
         Добро пожаловать, пользователь! войди чтобы просмотреть свои комнаты.
     </div>
 
-    <div ng-if="isLogined" ng-controller="RoomsController">
+    <div ng-if="isLogined" ng-controller="RoomsListController">
 
         <button class="btn btn-sm btn-primary" create-new-room>Добавить комнату</button>
 
         <div ng-if="rooms.length === 0">
             У вас нет комнат. Нажмите "Добавить комнату"
         </div>
-
+        <hr />
         <div ng-if="rooms.length !== 0">
-            Тут перечисления комнат
+            <div class="room" ng-repeat="room in rooms" >
+                <button type="button" class="close" aria-hidden="true" uib-tooltip="Удалить" tooltip-placement="left" ng-click="delete(room.id);">&times;</button>
+                <div class="panel-body">
+                    <button type="button" class="btn btn-link" ng-click="openRoom(room.id)">{{room.name}}</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

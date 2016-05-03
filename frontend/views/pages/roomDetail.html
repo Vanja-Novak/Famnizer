@@ -1,0 +1,21 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading">Комната: {{room.name}}</div>
+    <div class="panel-body">
+        <div ng-if="products.length === 0">
+            У вас нет продуктов в комнате. Нажмите "Добавить продукт"
+        </div>
+        <hr />
+        <div ng-if="products.length !== 0">
+            <div class="room" ng-repeat="product in products" >
+                <button type="button" class="close" aria-hidden="true" uib-tooltip="Удалить" tooltip-placement="left" ng-click="delete(product.id);">&times;</button>
+                <div class="panel-body">
+                    <span>product.name</span>
+                    <span>:</span>
+                    <span>product.price</span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
