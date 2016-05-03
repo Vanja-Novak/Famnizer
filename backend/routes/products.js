@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../db');
-var Room = require('../model/Prduct');
+var Room = require('../model/Product');
 var RecordExistsError = require('../errors/RecordExistsError');
 var ObjectNotFoundError = require('../errors/ObjectNotFoundError');
 
@@ -14,3 +14,5 @@ router.get('/:room_id',function(req,resp,err) {
         }
     });
 });
+
+module.exports = router;
