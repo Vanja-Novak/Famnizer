@@ -33,7 +33,14 @@ angular.module('famnizer')
         $scope.createMethod = params.createMethod;
         $scope.room = {};
 
+
+
         $scope.save = function() {
+
+            if( ! document.querySelector('#createNewRoomForm').checkValidity()) {
+                return;
+            }
+
             $http({
                 url: 'rooms/add',
                 method: 'PUT',

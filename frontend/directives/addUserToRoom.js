@@ -1,20 +1,19 @@
 'use strict';
 
 angular.module('famnizer')
-    .directive('createNewProduct', function($uibModal) {
+    .directive('addUserToRoom', function($uibModal) {
         return {
             restrict: 'A',
             link: function($scope, $elem, $attrs) {
                 $elem.on('click', function () {
 
                     $uibModal.open({
-                        templateUrl: '/views/popups/createNewProductPopup.html',
-                        controller: 'CreateNewProductPopupCtrl',
+                        templateUrl: '/views/popups/addUserToRoomPopup.html',
+                        controller: 'AddUserToRoomPopupCtrl',
                         backdrop: 'static',
                         resolve: {
                             params: function () {
                                 return {
-                                    createMethod: $scope.createMethod,
                                     room: $scope.room
                                 };
                             }
@@ -23,40 +22,47 @@ angular.module('famnizer')
                 });
             },
             scope: {
-                createMethod: '&',
                 room: '='
             }
         };
     })
-    .controller('CreateNewProductPopupCtrl', function ($q, $scope, params, $http, StorageService, $growl, BroadcastService) {
+    .controller('AddUserToRoomPopupCtrl', function ($scope, params, $http, $growl) {
 
-
-        var currentUserId = StorageService.get(StorageService.configs.CurrentUserId);
-        $scope.createMethod = params.createMethod;
         $scope.room = params.room;
-        $scope.product = {};
+        $scope.user = {};
+        $scope.users = [];
 
         $scope.save = function() {
 
-            if( ! document.querySelector('#createNewProductForm').checkValidity()) {
+            if( ! document.querySelector('#addUserToRoomForm').checkValidity()) {
                 return;
             }
 
-            $scope.product.isClosed = false;
-            $scope.product.room = $scope.room;
-
             $http({
-                url: 'products',
+                url: 'rooms/users',
                 method: 'PUT',
                 data: {
                     product: $scope.product
                 }
             }).success(function () {
-                $growl.addMessage('Success', 'Продукт создан', 'success');
-                BroadcastService.action('PRODUCT_CREATED');
+                $growl.addMessage('Success', 'Пользователь добавлен', 'success');
                 $scope.$close();
             }).error(function(res) {
                 $growl.addMessage('Attention!', res.message, 'error');
             });
         }
+
+        function getUsers() {
+            $http({
+                method: 'GET',
+                url: 'users'
+            }).success(function(res) {
+                $scope.users = res;
+            });
+        };
+        function init() {
+            getUsers();
+        }
+
+        init();
     });
