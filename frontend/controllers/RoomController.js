@@ -6,21 +6,25 @@ angular.module('famnizer')
         '$scope',
         '$state',
         '$http',
+        'BroadcastService',
 
-        function($scope, $state, $http) {
+        function($scope, $state, $http, BroadcastService) {
 
             $scope.room = {};
             $scope.roomId = $state.params.roomId;
             $scope.products = [];
 
-            var init = function() {
+
+            function getRoomInfo() {
                 $http({
                     method: 'GET',
                     url: 'rooms/' + $scope.roomId
                 }).success(function (res) {
                     $scope.room = res[0];
                 });
+            }
 
+            function getRoomProducts() {
                 $http({
                     method: 'GET',
                     url: 'products/room/' + $scope.roomId
@@ -28,6 +32,15 @@ angular.module('famnizer')
                     $scope.products = res;
                 });
             }
+
+            var init = function() {
+                getRoomInfo();
+                getRoomProducts();
+            }
+
+            BroadcastService.onAction('PRODUCT_CREATED', $scope, function() {
+                getRoomProducts();
+            });
 
             init();
         }

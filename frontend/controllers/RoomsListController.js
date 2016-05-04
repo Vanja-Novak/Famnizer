@@ -19,6 +19,7 @@ angular.module('famnizer')
                     url: 'rooms/' + id
                 }).success(function () {
                     $growl.addMessage('Success', 'Удаление комнаты прошло успешно', 'success');
+                    getRooms();
                 })
             };
 

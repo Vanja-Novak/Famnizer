@@ -3,19 +3,27 @@
 
         <div class="modal-header">
             <button type="button" class="close" aria-hidden="true" uib-tooltip="Закрыть" tooltip-placement="left" ng-click="$close();">&times;</button>
-            <h4 class="modal-title" id="newRoomTitle"> Создание новой комнаты </h4>
+            <h4 class="modal-title" id="newRoomTitle"> Создание нового продукта </h4>
         </div>
 
         <div class="modal-body">
-            <form class="form-horizontal" role="alert" id="createNewRoomForm">
+            <form class="form-horizontal" role="alert" id="createNewProductForm">
                 <div>
                     <fieldset>
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="name"> Название </label>
                             <div class="col-md-6">
-                                <input id="name" name="name" class="form-control" ng-model="room.name">
+                                <input id="name" name="name" class="form-control" ng-model="product.name">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="price"> Цена </label>
+                            <div class="col-md-6">
+                                <input id="price" name="price" class="form-control" ng-model="product.price">
+                            </div>
+                        </div>
+
                     </fieldset>
                 </div>
             </form>
