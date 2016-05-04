@@ -6,8 +6,10 @@ angular.module('famnizer')
         '$scope',
         '$state',
         '$http',
+        'BroadcastService',
+        '$growl',
 
-        function($scope, $state, $http) {
+        function($scope, $state, $http, BroadcastService, $growl) {
 
             $scope.rooms = [];
 
@@ -15,14 +17,16 @@ angular.module('famnizer')
                 $http({
                     method: 'DELETE',
                     url: 'rooms/' + id
-                });
+                }).success(function () {
+                    $growl.addMessage('Success', 'Удаление комнаты прошло успешно', 'success');
+                })
             };
 
             $scope.openRoom = function (id) {
                 $state.go('roomDetail', {roomId: id});
             };
 
-            var init = function() {
+            var getRooms = function () {
                 $http({
                     method: 'GET',
                     url: 'rooms/'
@@ -30,6 +34,14 @@ angular.module('famnizer')
                     $scope.rooms = res;
                 })
             }
+
+            var init = function() {
+                getRooms();
+            }
+
+            BroadcastService.onAction('ROOM_CREATED', $scope, function() {
+               getRooms();
+            });
 
             init();
         }

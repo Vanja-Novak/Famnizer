@@ -26,7 +26,7 @@ angular.module('famnizer')
             }
         };
     })
-    .controller('CreateNewRoomPopupCtrl', function ($q, $scope, params, $http, StorageService) {
+    .controller('CreateNewRoomPopupCtrl', function ($q, $scope, params, $http, StorageService, $growl, BroadcastService) {
 
 
         var currentUserId = StorageService.get(StorageService.configs.CurrentUserId);
@@ -42,6 +42,8 @@ angular.module('famnizer')
                     userId: +currentUserId
                 }
             }).success(function () {
+                $growl.addMessage('Success', 'Комната создана', 'success');
+                BroadcastService.action('ROOM_CREATED');
                 $scope.$close();
             });
         }
