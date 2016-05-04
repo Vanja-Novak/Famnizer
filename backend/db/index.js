@@ -14,6 +14,10 @@ function Storage() {
         roomId = +roomId;
         connection.query('SELECT * FROM Product WHERE room_fk = ' + roomId, callback);
     };
+
+    API.addProduct = function(product, callback) {
+        connection.query('INSERT INTO Product SET ?', product, callback);
+    };
     
     API.getRooms = function(userId, callback) {
         connection.query('SELECT Room.id, Room.name FROM Room INNER JOIN Room_has_User ON Room.id = Room_has_User.room_fk WHERE Room_has_User.user_fk =' + userId, callback);

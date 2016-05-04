@@ -1,7 +1,7 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">Комната: {{room.name}}</div>
-    <button class="btn btn-sm btn-primary" create-new-product>Добавить продукт</button>
+    <button class="btn btn-sm btn-primary" create-new-product room="room">Добавить продукт</button>
     <div class="panel-body">
         <div ng-if="products.length === 0">
             У вас нет продуктов в комнате. Нажмите "Добавить продукт"
@@ -11,10 +11,9 @@
             <div class="room" ng-repeat="product in products" >
                 <button type="button" class="close" aria-hidden="true" uib-tooltip="Удалить" tooltip-placement="left" ng-click="delete(product.id);">&times;</button>
                 <div class="panel-body">
-                    <span>product.name</span>
+                    <span>{{product.name}}</span>
                     <span>:</span>
-                    <span>product.price</span>
-
+                    <span>{{product.price}} руб.</span>
                 </div>
             </div>
         </div>

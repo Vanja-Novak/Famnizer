@@ -14,7 +14,8 @@ angular.module('famnizer')
                         resolve: {
                             params: function () {
                                 return {
-                                    createMethod: $scope.createMethod
+                                    createMethod: $scope.createMethod,
+                                    room: $scope.room
                                 };
                             }
                         }
@@ -22,7 +23,8 @@ angular.module('famnizer')
                 });
             },
             scope: {
-                createMethod: '&'
+                createMethod: '&',
+                room: '='
             }
         };
     })
@@ -31,14 +33,16 @@ angular.module('famnizer')
 
         var currentUserId = StorageService.get(StorageService.configs.CurrentUserId);
         $scope.createMethod = params.createMethod;
+        $scope.room = params.room;
         $scope.product = {};
 
         $scope.save = function() {
 
             $scope.product.isClosed = false;
+            $scope.product.room = $scope.room;
 
             $http({
-                url: 'product',
+                url: 'products',
                 method: 'PUT',
                 data: {
                     product: $scope.product
