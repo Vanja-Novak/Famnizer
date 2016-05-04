@@ -51,4 +51,19 @@ router.put('/add', function(req,res,next) {
     });
 });
 
+router.put('/users', function (req, res, next) {
+    var roomId = req.body.room.id;
+    var userId = req.body.user.id;
+
+    db.addUserToRoom(roomId, userId, function(err) {
+        if(err) {
+            next(new Error(500));
+        } else {
+            res.json({
+                message: "Пользователь добавлен"
+            });
+        }
+    });
+});
+
 module.exports = router;

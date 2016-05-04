@@ -41,6 +41,10 @@ function Storage() {
         });
     };
 
+    API.addUserToRoom = function (roomId, userId, callback) {
+        connection.query('INSERT INTO Room_has_User SET ?', {room_fk : roomId, user_fk : userId}, callback);
+    };
+
     API.deleteRoomById = function(roomId,callback) {
         connection.query('DELETE FROM Room WHERE id = ' + roomId);
         connection.query('DELETE FROM Product WHERE room_fk = ' + roomId);

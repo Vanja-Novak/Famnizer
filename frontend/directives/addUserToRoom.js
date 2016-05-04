@@ -42,7 +42,8 @@ angular.module('famnizer')
                 url: 'rooms/users',
                 method: 'PUT',
                 data: {
-                    product: $scope.product
+                    user: $scope.user,
+                    room: $scope.room
                 }
             }).success(function () {
                 $growl.addMessage('Success', 'Пользователь добавлен', 'success');
