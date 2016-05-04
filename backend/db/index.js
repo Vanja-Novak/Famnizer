@@ -12,7 +12,7 @@ function Storage() {
 
     API.getProductsWithRoomId = function(roomId, callback) {
         roomId = +roomId;
-        connection.query('SELECT * FROM `Product` WHERE room_fk = ' + roomId + ')',callback);
+        connection.query('SELECT * FROM Product WHERE room_fk = ' + roomId, callback);
     };
 
     API.getRooms = function(userId, callback) {
@@ -34,8 +34,8 @@ function Storage() {
     };
 
     API.deleteRoomById = function(roomId,callback) {
-        connection.query('DELETE FRROM User_has_Room WHERE room_fk = ' + roomId);
-        connection.query('DELETE FROM Room WHERE id = ' + roomId, callback);
+        connection.query('DELETE FROM Room WHERE id = ' + roomId);
+        connection.query('DELETE FROM Room_has_User WHERE room_fk = ' + roomId, callback);
     };
 
     API.updateRoom = function (room, callback) {
