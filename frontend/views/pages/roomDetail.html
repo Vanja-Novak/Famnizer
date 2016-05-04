@@ -15,6 +15,12 @@
                     <span>{{product.name}}</span>
                     <span>:</span>
                     <span>{{product.price}} руб.</span>
+                    <span ng-if="product.owner">
+                        покупает: {{product.owner.login}}
+                    </span>
+                    <button class='btn btn-info round35-button' assign-user room="room" uib-tooltip='Присвоить пользователю' tooltip-placement='top'>
+                        <span class='glyphicon glyphicon-user'></span>
+                    </button>
                 </div>
             </div>
         </div>

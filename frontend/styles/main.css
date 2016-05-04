@@ -5,3 +5,14 @@
     border-radius: 5px;
     margin-right: 10px;
 }
+
+.round35-button {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    margin-left: 10px;
+}
+
+.round35-button>span {
+    right: 2px;
+}
