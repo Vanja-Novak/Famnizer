@@ -38,9 +38,9 @@ router.delete('/:room_id', function (req,res,next) {
 
 router.put('/add', function(req,res,next) {
     var room = new Room(req.body.room.name);
-    var userId = req.body.userId;
+    var user = req.currentUser;
 
-    db.addRoom(room, userId, function(err) {
+    db.addRoom(room, user.id, function(err) {
         if(err) {
             next(new RecordExistsError(500));
         } else {
