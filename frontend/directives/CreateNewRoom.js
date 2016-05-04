@@ -45,6 +45,8 @@ angular.module('famnizer')
                 $growl.addMessage('Success', 'Комната создана', 'success');
                 BroadcastService.action('ROOM_CREATED');
                 $scope.$close();
+            }).error(function(res) {
+                $growl.addMessage('Attention!', res.message, 'error');
             });
         }
     });

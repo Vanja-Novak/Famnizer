@@ -27,4 +27,14 @@ router.put('/', function(req, res, next) {
     });
 });
 
+router.delete('/:product_id', function (req,res,next) {
+    db.deleteProductById(req.params.product_id,function(err,rows, fields) {
+        if (err) {
+            next(new ObjectNotFoundError(500, "Продукт не найден"));
+        } else {
+            res.send(rows);
+        }
+    });
+});
+
 module.exports = router;

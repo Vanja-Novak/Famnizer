@@ -51,6 +51,8 @@ angular.module('famnizer')
                 $growl.addMessage('Success', 'Продукт создан', 'success');
                 BroadcastService.action('PRODUCT_CREATED');
                 $scope.$close();
+            }).error(function(res) {
+                $growl.addMessage('Attention!', res.message, 'error');
             });
         }
     });

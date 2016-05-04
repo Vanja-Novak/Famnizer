@@ -6,14 +6,24 @@ angular.module('famnizer')
         '$scope',
         '$state',
         '$http',
+        '$growl',
         'BroadcastService',
 
-        function($scope, $state, $http, BroadcastService) {
+        function($scope, $state, $http, $growl, BroadcastService) {
 
             $scope.room = {};
             $scope.roomId = $state.params.roomId;
             $scope.products = [];
 
+            $scope.delete = function(id) {
+                $http({
+                    method: 'DELETE',
+                    url: 'products/' + id
+                }).success(function () {
+                    $growl.addMessage('Success', 'Удаление продукта прошло успешно', 'success');
+                    getRoomProducts();
+                });
+            };
 
             function getRoomInfo() {
                 $http({

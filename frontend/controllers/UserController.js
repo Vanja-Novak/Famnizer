@@ -50,7 +50,6 @@ angular.module('famnizer')
                     BroadcastService.action('USER_LOGINED');
                     $state.go('index');
                 }).error(function (responce, status) {
-                    console.log(status);
                     $growl.addMessage('Attention!', responce.message, 'error');
                 });
             };
