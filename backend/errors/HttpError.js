@@ -5,7 +5,7 @@ function HttpError(status, message) {
     Error.captureStackTrace(this, HttpError);
 
     this.status = status || 404;
-    this.message = message || 'Something went wrong';
+    this.message = message || 'Что-то пошло не так :)';
 };
 util.inherits(HttpError, Error);
 HttpError.prototype.name = 'HttpError';

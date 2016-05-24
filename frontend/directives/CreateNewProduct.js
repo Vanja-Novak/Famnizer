@@ -52,7 +52,7 @@ angular.module('famnizer')
                     product: $scope.product
                 }
             }).success(function () {
-                $growl.addMessage('Success', 'Продукт создан', 'success');
+                $growl.addMessage('Success', 'Материал создан', 'success');
                 BroadcastService.action('PRODUCT_CREATED');
                 $scope.$close();
             }).error(function(res) {

@@ -1,11 +1,11 @@
 
 <div class="panel panel-default">
-    <div class="panel-heading">Комната: {{room.name}}</div>
-    <button class="btn btn-sm btn-primary" create-new-product room="room">Добавить продукт</button>
-    <button class="btn btn-sm btn-primary" add-user-to-room room="room">Добавить пользователя</button>
+    <div class="panel-heading">Категория: {{room.name}}</div>
+    <button class="btn btn-sm btn-primary" create-new-product room="room">Добавить содержимое</button>
+    <button class="btn btn-sm btn-primary" add-user-to-room room="room">Поделиться с пользователем</button>
     <div class="panel-body">
         <div ng-if="products.length === 0">
-            У вас нет продуктов в комнате. Нажмите "Добавить продукт"
+            У вас нет материалов в категоории. Нажмите "Добавить содержимое"
         </div>
         <hr />
         <div ng-if="products.length !== 0">
@@ -13,12 +13,12 @@
                 <button type="button" class="close" aria-hidden="true" uib-tooltip="Удалить" tooltip-placement="left" ng-click="delete(product.id);">&times;</button>
                 <div class="panel-body">
                     <span>{{product.name}}</span>
-                    <span>:</span>
-                    <span>{{product.price}} руб.</span>
+                    <span> : </span>
+                    <span>{{product.description}}</span>
                     <span ng-if="product.owner">
-                        покупает: {{product.owner.login}}
+                        изучает: {{product.owner.login}}
                     </span>
-                    <button class='btn btn-info round35-button' assign-user room="room" uib-tooltip='Присвоить пользователю' tooltip-placement='top'>
+                    <button class='btn btn-info round35-button' assign-user room="room" uib-tooltip='Назначить пользователю' tooltip-placement='top'>
                         <span class='glyphicon glyphicon-user'></span>
                     </button>
                 </div>

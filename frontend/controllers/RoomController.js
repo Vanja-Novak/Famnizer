@@ -20,7 +20,7 @@ angular.module('famnizer')
                     method: 'DELETE',
                     url: 'products/' + id
                 }).success(function () {
-                    $growl.addMessage('Success', 'Удаление продукта прошло успешно', 'success');
+                    $growl.addMessage('Success', 'Удаление категории прошло успешно', 'success');
                     getRoomProducts();
                 });
             };

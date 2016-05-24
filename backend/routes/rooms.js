@@ -9,7 +9,7 @@ router.get('/', function(req,res,next) {
     var user = req.currentUser;
     db.getRooms(user.id,function (err, rows, fileds) {
         if (err) {
-            next(new ObjectNotFoundError(500, "Комнаты не найдены"));
+            next(new ObjectNotFoundError(500, "Категории не найдены"));
         } else {
             res.send(rows);
         }
@@ -19,7 +19,7 @@ router.get('/', function(req,res,next) {
 router.get('/:room_id', function (req,res,next) {
     db.getRoomById(req.params.room_id,function(err,rows, fields) {
         if (err) {
-            next(new ObjectNotFoundError(500, "Комната не найдена"));
+            next(new ObjectNotFoundError(500, "Категория не найдена"));
         } else {
             res.send(rows);
         }
@@ -27,9 +27,10 @@ router.get('/:room_id', function (req,res,next) {
 });
 
 router.delete('/:room_id', function (req,res,next) {
-    db.deleteRoomById(req.params.room_id,function(err,rows, fields) {
+    var user = req.currentUser;
+    db.deleteRoomById(req.params.room_id, user.id,function(err,rows, fields) {
         if (err) {
-            next(new ObjectNotFoundError(500, "Комната не найдена"));
+            next(new ObjectNotFoundError(500, "Категория не найдена"));
         } else {
             res.send(rows);
         }
@@ -45,7 +46,7 @@ router.put('/add', function(req,res,next) {
             next(new RecordExistsError(500));
         } else {
             res.json({
-                message: "комната создана"
+                message: "Категория создана"
             });
         }
     });
@@ -60,7 +61,7 @@ router.put('/users', function (req, res, next) {
             next(new Error(500));
         } else {
             res.json({
-                message: "Пользователь добавлен"
+                message: "Пользователь оповещен"
             });
         }
     });
@@ -71,7 +72,7 @@ router.put('/:room_id/users', function (req, res, next) {
 
     db.getUsersByRoomId(roomId,function(err,rows, fields) {
         if (err) {
-            next(new ObjectNotFoundError(500, "Комната не найдена"));
+            next(new ObjectNotFoundError(500, "Категория не найдена"));
         } else {
             res.send(rows);
         }

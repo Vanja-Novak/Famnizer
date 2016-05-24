@@ -49,7 +49,7 @@ angular.module('famnizer')
                     userId: +currentUserId
                 }
             }).success(function () {
-                $growl.addMessage('Success', 'Комната создана', 'success');
+                $growl.addMessage('Success', 'Категория создана', 'success');
                 BroadcastService.action('ROOM_CREATED');
                 $scope.$close();
             }).error(function(res) {

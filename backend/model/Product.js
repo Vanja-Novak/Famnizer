@@ -13,7 +13,7 @@ function Product() {
 function initProduct(product, user) {
     this.id = product.id;
     this.name = product.name;
-    this.price = product.price;
+    this.description = product.description;
     this.isClosed = product.isClosed;
     this.room_fk = product.room.id;
     this.created_by = user.id;

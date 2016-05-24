@@ -1,15 +1,15 @@
 <div >
 
     <div class="panel-heading" ng-if="!isLogined">
-        Добро пожаловать, пользователь! войди чтобы просмотреть свои комнаты.
+        Добро пожаловать! войди чтобы просмотреть свои категории.
     </div>
 
     <div ng-if="isLogined" ng-controller="RoomsListController">
 
-        <button class="btn btn-sm btn-primary" create-new-room>Добавить комнату</button>
+        <button class="btn btn-sm btn-primary" create-new-room>Добавить категорию</button>
 
         <div ng-if="rooms.length === 0">
-            У вас нет комнат. Нажмите "Добавить комнату"
+            У вас нет категорий. Нажмите "Добавить категорию"
         </div>
         <hr />
         <div ng-if="rooms.length !== 0">

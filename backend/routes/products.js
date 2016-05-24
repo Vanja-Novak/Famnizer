@@ -8,7 +8,7 @@ var ObjectNotFoundError = require('../errors/ObjectNotFoundError');
 router.get('/room/:room_id',function(req,res,next) {
     db.getProductsWithRoomId(req.params.room_id,function(err,rows, fields) {
         if (err) {
-            next(new ObjectNotFoundError(500, "Продукты не найдены"));
+            next(new ObjectNotFoundError(500, "Материалы не найдены"));
         } else {
             res.send(rows);
         }
@@ -20,7 +20,7 @@ router.put('/', function(req, res, next) {
     var product = new Product(req.body.product, user);
     db.addProduct(product, function(err, rows, fields) {
         if (err) {
-            next(new ObjectNotFoundError(500, "Ошибка при создании продукта"));
+            next(new ObjectNotFoundError(500, "Ошибка при создании материала"));
         } else {
             res.send(rows);
         }
@@ -30,7 +30,7 @@ router.put('/', function(req, res, next) {
 router.delete('/:product_id', function (req,res,next) {
     db.deleteProductById(req.params.product_id,function(err,rows, fields) {
         if (err) {
-            next(new ObjectNotFoundError(500, "Продукт не найден"));
+            next(new ObjectNotFoundError(500, "Материал не найден"));
         } else {
             res.send(rows);
         }

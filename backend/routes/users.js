@@ -20,7 +20,7 @@ router.put('/register', function(req, res, next) {
             next(new RecordExistsError(500));
         } else {
             res.json({
-                message: "регистрация успешна"
+                message: "Регистрация прошла успешно"
             });
         }
     });
