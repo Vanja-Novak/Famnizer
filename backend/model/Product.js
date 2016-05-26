@@ -17,6 +17,8 @@ function initProduct(product, user) {
     this.isClosed = product.isClosed;
     this.room_fk = product.room.id;
     this.created_by = user.id;
+    this.owner = product.owner;
+    this.filePath = product.filePath;
 }
 
 module.exports = Product;

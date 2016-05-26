@@ -12,7 +12,7 @@ function Storage() {
 
     API.getProductsWithRoomId = function(roomId, callback) {
         roomId = +roomId;
-        connection.query('SELECT * FROM Product WHERE room_fk = ' + roomId, callback);
+        connection.query('SELECT p.*, u.login FROM Product p left join User u on p.owner = u.id WHERE room_fk = ' + roomId, callback);
     };
 
     API.addProduct = function(product, callback) {
@@ -39,6 +39,10 @@ function Storage() {
                 connection.query('INSERT INTO Room_has_User SET ?', {room_fk : result.insertId, user_fk : userId}, callback);
             }
         });
+    };
+
+    API.assigneeUserToProduct = function(productId, userId, callback) {
+        connection.query('UPDATE Product SET owner = ' + userId + ' WHERE id = ' + productId, callback);
     };
 
     API.addUserToRoom = function (roomId, userId, callback) {

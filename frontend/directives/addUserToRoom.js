@@ -46,10 +46,10 @@ angular.module('famnizer')
                     room: $scope.room
                 }
             }).success(function () {
-                $growl.addMessage('Success', 'Пользователь добавлен', 'success');
+                $growl.addMessage('Успех', 'Пользователь добавлен', 'success');
                 $scope.$close();
             }).error(function(res) {
-                $growl.addMessage('Attention!', res.message, 'error');
+                $growl.addMessage('Внимание', 'Пользователь уже добавлен', 'error');
             });
         }
 

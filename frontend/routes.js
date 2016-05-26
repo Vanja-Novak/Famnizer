@@ -24,7 +24,7 @@ app.config([
                 url: '/',
                 templateUrl: 'views/pages/index.html',
                 data: {
-                    title: 'Famnizer'
+                    title: 'Learning'
                 }
             })
             .state('register', {
@@ -51,7 +51,7 @@ app.config([
                 templateUrl: 'views/pages/roomDetail.html',
                 controller: 'RoomController',
                 data: {
-                    title: 'Комната'
+                    title: 'Category'
                 }
             })
     }]

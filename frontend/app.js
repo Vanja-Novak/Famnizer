@@ -9,6 +9,8 @@ app.config([
 
     function($httpProvider, $animateProvider, $compileProvider) {
 
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
+
         var requestInterceptor = function($q, StorageService){
             return {
                 'request': function (config) {

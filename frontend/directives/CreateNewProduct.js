@@ -52,11 +52,11 @@ angular.module('famnizer')
                     product: $scope.product
                 }
             }).success(function () {
-                $growl.addMessage('Success', 'Материал создан', 'success');
+                $growl.addMessage('Успех', 'Материал создан', 'success');
                 BroadcastService.action('PRODUCT_CREATED');
                 $scope.$close();
             }).error(function(res) {
-                $growl.addMessage('Attention!', res.message, 'error');
+                $growl.addMessage('Ошибка', res.message, 'error');
             });
         }
     });

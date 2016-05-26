@@ -14,7 +14,8 @@ angular.module('famnizer')
                         resolve: {
                             params: function () {
                                 return {
-                                    room: $scope.room
+                                    room: $scope.room,
+                                    product : $scope.product
                                 };
                             }
                         }
@@ -22,41 +23,44 @@ angular.module('famnizer')
                 });
             },
             scope: {
-                room: '='
+                room: '=',
+                product: '='
             }
         };
     })
-    .controller('AssignUserPopupCtrl', function ($scope, params, $http, $growl) {
+    .controller('AssignUserPopupCtrl', function ($scope, params, $http, $growl, BroadcastService) {
 
+        $scope.product = params.product;
         $scope.room = params.room;
         $scope.user = {};
         $scope.users = [];
 
         $scope.save = function() {
 
-            if( ! document.querySelector('#addUserToRoomForm').checkValidity()) {
+            if( ! document.querySelector('#assignUserForm').checkValidity()) {
                 return;
             }
 
             $http({
-                url: 'rooms/' + roomId + '/users',
+                url: 'products/assignee',
                 method: 'PUT',
                 data: {
                     user: $scope.user,
-                    room: $scope.room
+                    product: $scope.product
                 }
             }).success(function () {
-                $growl.addMessage('Success', 'Пользователь назначен', 'success');
+                $growl.addMessage('Уcпех', 'Пользователь назначен', 'success');
+                BroadcastService.action('PRODUCT_CREATED');
                 $scope.$close();
             }).error(function(res) {
-                $growl.addMessage('Attention!', res.message, 'error');
+                $growl.addMessage('Ошибка', res.message, 'error');
             });
         }
 
         function getUsers() {
             $http({
                 method: 'GET',
-                url: 'rooms/' + $scope.room.id + '/users'
+                url: 'rooms/users/' + $scope.room.id
             }).success(function(res) {
                 $scope.users = res;
             });

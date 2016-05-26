@@ -67,12 +67,11 @@ router.put('/users', function (req, res, next) {
     });
 });
 
-router.put('/:room_id/users', function (req, res, next) {
+router.get('/users/:room_id', function (req, res, next) {
     var roomId = +req.params.room_id;
-
     db.getUsersByRoomId(roomId,function(err,rows, fields) {
         if (err) {
-            next(new ObjectNotFoundError(500, "Категория не найдена"));
+            next(new ObjectNotFoundError(500, "Пользователи не найдены"));
         } else {
             res.send(rows);
         }

@@ -13,12 +13,16 @@
                 <button type="button" class="close" aria-hidden="true" uib-tooltip="Удалить" tooltip-placement="left" ng-click="delete(product.id);">&times;</button>
                 <div class="panel-body">
                     <span>{{product.name}}</span>
-                    <span> : </span>
+                    </p>
                     <span>{{product.description}}</span>
+                    </p>
                     <span ng-if="product.owner">
-                        изучает: {{product.owner.login}}
+                        изучает: {{product.login}}
                     </span>
-                    <button class='btn btn-info round35-button' assign-user room="room" uib-tooltip='Назначить пользователю' tooltip-placement='top'>
+                    </p>
+                    <button class="btn btn-sm btn-primary" ng-click="download(product.id);">Download</button>
+                    </p>
+                    <button class='btn btn-info round35-button' assign-user room="room" product="product" uib-tooltip='Назначить пользователю' tooltip-placement='top'>
                         <span class='glyphicon glyphicon-user'></span>
                     </button>
                 </div>

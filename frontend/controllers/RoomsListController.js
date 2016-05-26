@@ -18,7 +18,7 @@ angular.module('famnizer')
                     method: 'DELETE',
                     url: 'rooms/' + id
                 }).success(function () {
-                    $growl.addMessage('Success', 'Удаление категории прошло успешно', 'success');
+                    $growl.addMessage('Успех', 'Категория была удалена', 'success');
                     getRooms();
                 })
             };
